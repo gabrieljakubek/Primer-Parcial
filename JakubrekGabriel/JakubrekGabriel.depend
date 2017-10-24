@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1507388391 source:e:\primerparcial\jakubrekgabriel\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"lib.h"
+
+1507383670 e:\primerparcial\jakubrekgabriel\lib.h
+
+1507215901 source:e:\primerparcial\jakubrekgabriel\main.c
+	<stdio.h>
+	<stdlib.h>
+	"lib.h"
+
+1508811147 source:g:\primerparcial\jakubrekgabriel\lib.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+	"lib.h"
+
+1508811040 g:\primerparcial\jakubrekgabriel\lib.h
+
+1508734139 source:g:\primerparcial\jakubrekgabriel\main.c
+	<stdio.h>
+	<stdlib.h>
+	"lib.h"
+

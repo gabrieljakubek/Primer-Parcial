@@ -20,9 +20,22 @@ void funCambiarEstado(eUsuario listaUsu[],int tU, eProducto listaPro[], int tP)
 
 int funMostrarMenu(char texto[])
 {
-    int opcion;
+    int opcion, auxInt;
+    char auxChar[10];
     printf("%s", texto);
-    scanf("%d", &opcion);
+    printf("\nIngrese la opcion (solo numeros): ");
+    fflush(stdin);
+    gets(auxChar);
+    auxInt = funChequeoNumero(auxChar);
+    while (auxInt != 0)
+    {
+        printf("Reingrese la opcion (solo numeros): ");
+        fflush(stdin);
+        gets(auxChar);
+        auxInt = funChequeoNumero(auxChar);
+    }
+    opcion = atoi(auxChar);
+
 
     return opcion;
 }
@@ -67,7 +80,8 @@ int funObtenerEspacioLibreProducto(eProducto lista[], int t)
 
 int funAltaUsu(eUsuario lista[],int t)
 {
-    int index, auxInt;
+    int index, auxInt, auxCont;
+    char auxChar [50];
     int flag = 0;
     index = funObtenerEspacioLibre(lista,t);
 
@@ -76,28 +90,34 @@ int funAltaUsu(eUsuario lista[],int t)
         auxInt = funCrearUsu(lista,index,t);
         if (auxInt)
         {
-            printf("Ingrese el Nombre: ");
+            printf("Ingrese el Nombre (%d caracteres maximo): ",CHARNOMUSU);
             fflush(stdin);
-            gets(lista[index].Nombre);
-            auxInt = funChequeoLetras(lista[index].Nombre);
+            gets(auxChar);
+            auxInt = funChequeoLetras(auxChar);
+            auxCont = funContarCaracteres(auxChar,CHARNOMUSU);
+            while (auxInt != 0 && auxCont != 0)
+            {
+                printf("Reingrese el Nombre(%d caracteres maximo): ",CHARNOMUSU);
+                fflush(stdin);
+                gets(auxChar);
+                auxInt = funChequeoLetras(auxChar);
+                auxCont = funContarCaracteres(auxChar,CHARNOMUSU);
+            }
+            strcpy(lista[index].Nombre,auxChar);
+            printf("Ingrese el Apellido (%d caracters macimo): ",CHARAPEUSU);
+            fflush(stdin);
+            gets(auxChar);
+            auxInt = funChequeoLetras(auxChar);
+            auxCont = funContarCaracteres(auxChar,CHARAPEUSU);
             while (auxInt != 0)
             {
-                printf("Reingrese el Nombre: ");
+                printf("Reingrese el Apellido (%d caracters macimo): ",CHARAPEUSU);
                 fflush(stdin);
-                gets(lista[index].Nombre);
-                auxInt = funChequeoLetras(lista[index].Nombre);
+                gets(auxChar);
+                auxInt = funChequeoLetras(auxChar);
+                auxCont = funContarCaracteres(auxChar,CHARAPEUSU);
             }
-            printf("Ingrese el Apellido: ");
-            fflush(stdin);
-            gets(lista[index].Apellido);
-            auxInt = funChequeoLetras(lista[index].Apellido);
-            while (auxInt != 0)
-            {
-                printf("Reingrese el Apellido: ");
-                fflush(stdin);
-                gets(lista[index].Apellido);
-                auxInt = funChequeoLetras(lista[index].Apellido);
-            }
+            strcpy(lista[index].Apellido,auxChar);
 
             lista[index].calificacion = 0;
             lista[index].CantVentas = 0;
@@ -118,27 +138,56 @@ int funAltaUsu(eUsuario lista[],int t)
 
 int funAltaProd(eProducto lista[],int tP, eUsuario listaUsu[], int tU)
 {
-    int index, auxInt;
+    int index, auxInt, auxCont;
     int flag, flag2 = 0;
     char auxChar [50], auxChar1[50], auxChar2[50];
     index = funObtenerEspacioLibreProducto(lista,tP);
     if (index != -1)
     {
-        printf("Igrese el Usuario: ");
+
+        printf("Ingrese el Usuario (%d caracteres maximo): ",CHARUSU);
         fflush(stdin);
         gets(auxChar1);
-        printf("Igrese La Contraseña: ");
+        auxCont = funContarCaracteres(auxChar1,CHARUSU);
+        while (auxCont != 0)
+        {
+            printf("Reingrese el Usuario(%d caracteres maximo): ",CHARUSU);
+            fflush(stdin);
+            gets(auxChar);
+            auxInt = funChequeoLetras(auxChar1);
+            auxCont = funContarCaracteres(auxChar1,CHARUSU);
+        }
+        printf("Ingrese la contraseña (%d caracteres maximo): ",CHARPASS);
         fflush(stdin);
         gets(auxChar2);
+        auxCont = funContarCaracteres(auxChar2,CHARPASS);
+        while (auxCont != 0)
+        {
+            printf("Reingrese la contraseña (%d caracteres maximo): ",CHARPASS);
+            fflush(stdin);
+            gets(auxChar2);
+            auxCont = funContarCaracteres(auxChar2,CHARPASS);
+        }
         flag2 = funBuscarUsyCon(listaUsu, tU,auxChar1,auxChar2);
         if (flag2 != -1)
         {
             flag = 0;
             strcpy(lista[index].Usuario, auxChar1);
             lista[index].idProducto = index + 1;
-            printf("Ingrese el Producto: ");
+            printf("Ingrese el Nombre del Producto (%d caracteres maximo): ",CHARNOMPRO);
             fflush(stdin);
-            gets(lista[index].Nombre);
+            gets(auxChar);
+            auxInt = funChequeoLetras(auxChar);
+            auxCont = funContarCaracteres(auxChar,CHARNOMPRO);
+            while (auxInt != 0 && auxCont != 0)
+            {
+                printf("Reingrese el Nombre del Producto (%d caracteres maximo): ",CHARNOMPRO);
+                fflush(stdin);
+                gets(auxChar);
+                auxInt = funChequeoLetras(auxChar);
+                auxCont = funContarCaracteres(auxChar,CHARNOMUSU);
+            }
+            strcpy(lista[index].Nombre,auxChar);
             printf("Ingrese el Stock: ");
             fflush(stdin);
             gets(auxChar);
@@ -213,6 +262,7 @@ int funBuscarUsuario(eUsuario lista[], char usua[], int t)
         if (strcmp(lista[i].Usuario,usua)==0)
         {
             index = i;
+            break;
         }
         else
         {
@@ -297,18 +347,39 @@ void funMostrarTodasPublicaciones(eProducto lista[], int t)
 
 int funCrearUsu(eUsuario lista[],int index, int t)
 {
-    int flag = 0,auxInt;
+    int flag = 0,auxInt, auxCont;
     char auxChar[50];
-    printf("Ingrese el Usuario: ");
+
+    printf("Ingrese el Usuario (%d caracteres maximo): ",CHARUSU);
     fflush(stdin);
     gets(auxChar);
+    auxCont = funContarCaracteres(auxChar,CHARUSU);
+    while (auxCont != 0)
+    {
+        printf("Reingrese el Usuario(%d caracteres maximo): ",CHARUSU);
+        fflush(stdin);
+        gets(auxChar);
+        auxInt = funChequeoLetras(auxChar);
+        auxCont = funContarCaracteres(auxChar,CHARUSU);
+    }
     auxInt = funBuscarUsuario(lista,auxChar,t);
-    if (auxInt != -1)
+
+    if (auxInt == -1)
     {
         strcpy(lista[index].Usuario,auxChar);
-        printf("Ingrese el Contrasenia: ");
+        printf("Ingrese la contraseña (%d caracteres maximo): ",CHARPASS);
         fflush(stdin);
-        gets(lista[index].Password);
+        gets(auxChar);
+        auxCont = funContarCaracteres(auxChar,CHARPASS);
+        while (auxCont != 0)
+        {
+            printf("Reingrese la contraseña (%d caracteres maximo): ",CHARPASS);
+            fflush(stdin);
+            gets(auxChar);
+            auxCont = funContarCaracteres(auxChar,CHARPASS);
+        }
+        strcpy(lista[index].Password,auxChar);
+
         flag = 1;
     }
 
@@ -442,7 +513,7 @@ int funModProd(eUsuario listaUsu[], int tU, eProducto listaProd[], int tP)
 
 int funModUsu(eUsuario lista[], int t)
 {
-    int index, opcion,auxRetor;
+    int index, opcion,auxRetor, auxInt;
     int flag = 0;
     char auxChar [50], auxChar1[50], auxChar2[50];
     char salir = 'n', auxResp;
@@ -472,12 +543,14 @@ int funModUsu(eUsuario lista[], int t)
                 fflush(stdin);
                 gets(auxChar);
                 auxRetor = funContarCaracteres(auxChar, CHARNOMUSU);
-                while (auxRetor!=0)
+                auxInt = funChequeoLetras(auxChar);
+                while (auxRetor!=0 && auxInt != 0)
                 {
                     printf("Reingrese el nuevo Nombre (%d caracteres Maximo): ",CHARNOMUSU);
                     fflush(stdin);
                     gets(auxChar);
                     auxRetor = funContarCaracteres(auxChar, CHARNOMUSU);
+                    auxInt = funChequeoLetras(auxChar);
                 }
                 printf("Esta seguro de cambiar el Nombre? s/n");
                 auxResp = getche();
@@ -499,12 +572,14 @@ int funModUsu(eUsuario lista[], int t)
                 fflush(stdin);
                 gets(auxChar);
                 auxRetor = funContarCaracteres(auxChar, CHARAPEUSU);
-                while (auxRetor!=0)
+                auxInt = funChequeoLetras(auxChar);
+                while (auxRetor!=0 && auxInt != 0)
                 {
                     printf("Reingrese el nuevo Apellido (%d caracteres Maximo): ",CHARAPEUSU);
                     fflush(stdin);
                     gets(auxChar);
                     auxRetor = funContarCaracteres(auxChar, CHARAPEUSU);
+                    auxInt = funChequeoLetras(auxChar);
                 }
                 printf("Esta seguro de cambiar el Apellido? s/n");
                 auxResp = getche();
@@ -564,7 +639,7 @@ int funModUsu(eUsuario lista[], int t)
 
 void funMostrarUsu(eUsuario lista)
 {
-    printf("%s\t%30s\t%20s\t%2f\n",lista.Usuario,lista.Nombre, lista.Apellido, lista.calipromedio);
+    printf("%s\t%30s\t%20s\t%.2f\n",lista.Usuario,lista.Nombre, lista.Apellido, lista.calipromedio);
 }
 
 void funMostrarTodosUsu(eUsuario lista[], int t)
@@ -794,10 +869,10 @@ int funListarPubUsu(eUsuario listaUsu[], int tUsu, eProducto listaPro[], int tPr
     index = funBuscarUsuario(listaUsu, auxChar1, tUsu);
     if (index != -1)
     {
+        printf("ID\t%50s\t%s\t%s\t%s\t%18s\n","Nombre","Precio","Vendido","Stock","Usuario");
         for (i=0; i<tPro; i++)
         {
-            printf("ID\t%50s\t%s\t%s\t%s\t%18s\n","Nombre","Precio","Vendido","Stock","Usuario");
-            if (strcmp(listaUsu[index].Usuario,listaPro[i].Usuario) == 0 && (listaPro[i].Estado == 0))
+            if (strcmp(listaUsu[index].Usuario,listaPro[i].Usuario) == 0 && (listaPro[i].Estado != 0))
             {
                 funMostrarPublicacion(listaPro[i]);
             }
@@ -828,4 +903,55 @@ void funBorrarPantalla()
 {
     system("pause");
     system("cls");
+}
+
+void funInicializarUsu(eUsuario lista[], int t)
+{
+    int i;
+    char usuario [][CHARUSU] = {"lalo","papo"};
+    char pass [][CHARPASS] = {"cacho","pepe"};
+    char nom [][CHARNOMUSU] = {"Jorge","Damian"};
+    char ape [] [CHARAPEUSU] = {"Lopez","Santos"};
+    int calific [] = {250,200};
+    int cantVentas [] = {3,2};
+    float calProm [] = {83.33,100};
+    int esta [] = {1,1};
+
+    for(i=0;i<2;i++)
+    {
+        strcpy(lista[i].Usuario,usuario[i]);
+        strcpy(lista[i].Password,pass[i]);
+        strcpy(lista[i].Nombre,nom[i]);
+        strcpy(lista[i].Apellido,ape[i]);
+        lista[i].calificacion = calific[i];
+        lista[i].CantVentas = cantVentas[i];
+        lista[i].calipromedio = calProm[i];
+        lista[i].Estado = esta[i];
+    }
+}
+
+void funInicializarProd(eProducto lista[], int t)
+{
+    int i;
+    int id [] = {1,2,3,4,5};
+    char nomProd [][CHARNOMPRO] = {"Computadora","Silla negra","Gorra","Escritorio","Auriculares"};
+    char nomUsu [][CHARUSU] = {"lalo","lalo","lalo","papo","papo"};
+    int stock [] = {6,7,9,3,4};
+    int precio [] = {5000,500,120,600,750};
+    int vendido [] = {2,5,3,2,4};
+    int cantVentas [] = {1,3,3,1,4};
+    int estado [] = {1,1,1,1,1};
+
+    for(i=0;i<5;i++)
+    {
+        lista[i].idProducto = id[i];
+        strcpy(lista[i].Usuario,nomUsu[i]);
+        strcpy(lista[i].Nombre,nomProd[i]);
+        lista[i].Stock = stock[i];
+        lista[i].Precio = precio[i];
+        lista[i].cantVentProduc = vendido[i];
+        lista[i].cantVentas = cantVentas[i];
+        lista[i].Estado = estado[i];
+    }
+
 }

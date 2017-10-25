@@ -5,7 +5,7 @@
 #define CHARPASS 18
 #define CHARNOMUSU 30
 #define CHARAPEUSU 20
-#define CHARNOMPRO 100
+#define CHARNOMPRO 50
 
 typedef struct
 {
@@ -26,8 +26,8 @@ typedef struct
     char Usuario [CHARNOMUSU];
     int Stock;
     int Precio;
-    int cantVentas;
-    int cantVentProduc;
+    int cantVentas; //Cantidad de compras que se realizaron
+    int cantVentProduc; // Cantidad de productos Vendidos
     int Estado;
 } eProducto;
 
@@ -112,7 +112,7 @@ int funChequeoNumero(char num[]);
 int funBuscarUsuario(eUsuario [], char[], int);
 
 
-/** 
+/**
  * Inicia los estados de Producto y Usuario en 0
  * \param [] eUsuario array de usuarios
  * \param int tamaño del array de usuarios
@@ -123,7 +123,7 @@ int funBuscarUsuario(eUsuario [], char[], int);
  */
 void funCambiarEstado(eUsuario [],int, eProducto [], int);
 
-/** 
+/**
  *  Crea un usuario
  * \param lista[] eUsuario array de usuarios
  * \param Index int pocicion en donde se encontro espacio libre
@@ -133,7 +133,7 @@ void funCambiarEstado(eUsuario [],int, eProducto [], int);
  */
 int funCrearUsu(eUsuario lista[],int Index, int t);
 
-/** 
+/**
  * Muestra la publicacion que se le pasa
  * \param lista eProducto array de productos
  * \return void
@@ -141,8 +141,8 @@ int funCrearUsu(eUsuario lista[],int Index, int t);
  */
 void funMotrarPublicacion(eProducto lista);
 
-/** 
- * Lista todas las publicaciones cargadas 
+/**
+ * Lista todas las publicaciones cargadas
  * \param lista[] eProducto array de productos
  * \param t int tamaño del array productos
  * \return void
@@ -194,7 +194,7 @@ int funContarCaracteres(char campo[], int tamano);
  */
 void funBorrarPantalla();
 
-/** 
+/**
  * Permite modificar los datos del usuario
  * \param lista[] eUsuario array de usuarios
  * \param t int tamaño del array usuario
@@ -203,7 +203,7 @@ void funBorrarPantalla();
  */
 int funModUsu(eUsuario lista[], int t);
 
-/** 
+/**
  *  Busca la publicacion ingresada
  * \param lista[] eProducto array de productos
  * \param ID int numero de ID de la publicacion a buscar
@@ -224,7 +224,7 @@ int funBuscarPub(eProducto lista[], int ID, int t);
  */
 int funBorrarProd(eUsuario listaUsu[], int tUsu, eProducto listaProd[], int tPro);
 
-/** 
+/**
  *  Permite modificar el precio y el stock de la publicacion
  * \param listaUsu[] eUsuario array de usuarios
  * \param tUsu int tamaño del array usuarios
@@ -245,3 +245,21 @@ int funModProd(eUsuario listaUsu[], int tUsu, eProducto listaProd[], int tPro);
  *
  */
 int funListarPubUsu(eUsuario listaUsu[], int tUsu, eProducto listaPro[], int tPro);
+
+/**
+ *  Hardcodea 2 productos
+ * \param lista[] eUsuario array de usuario
+ * \param t int tamaño del array usuario
+ * \return void
+ *
+ */
+void funInicializarUsu(eUsuario lista[], int t);
+
+/**
+ *  Hardcodea 5 productos
+ * \param lista[] eProducto array de producto
+ * \param t int tamaño del array producto
+ * \return void
+ *
+ */
+void funInicializarProd(eProducto lista[], int t);

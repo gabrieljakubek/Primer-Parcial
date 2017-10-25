@@ -13,7 +13,7 @@
 	<stdlib.h>
 	"lib.h"
 
-1508811147 source:g:\primerparcial\jakubrekgabriel\lib.c
+1508902748 source:g:\primerparcial\jakubrekgabriel\lib.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -21,9 +21,9 @@
 	<ctype.h>
 	"lib.h"
 
-1508811040 g:\primerparcial\jakubrekgabriel\lib.h
+1508901922 g:\primerparcial\jakubrekgabriel\lib.h
 
-1508734139 source:g:\primerparcial\jakubrekgabriel\main.c
+1508902862 source:g:\primerparcial\jakubrekgabriel\main.c
 	<stdio.h>
 	<stdlib.h>
 	"lib.h"

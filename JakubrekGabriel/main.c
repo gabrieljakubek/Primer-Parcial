@@ -12,6 +12,8 @@ int main()
     eUsuario listaUsu[USUARIO];
     eProducto listaProducto[PRODUCTOS];
     funCambiarEstado(listaUsu,USUARIO,listaProducto,PRODUCTOS);
+    funInicializarUsu(listaUsu, USUARIO);
+    funInicializarProd(listaProducto, PRODUCTOS);
     do
     {
         opcion = funMostrarMenu("1-Alta de Usuario\
@@ -24,8 +26,7 @@ int main()
                              \n8-Listar Publicaciones de Usuario\
                              \n9-Listar Publicaciones\
                              \n10-Listar Usuarios\
-                             \n11-Salir\
-                             \nIngrese opcion: ");
+                             \n11-Salir");
         switch(opcion)
         {
         case 1:
@@ -148,12 +149,12 @@ int main()
             break;
 
         case 8:
-            auxInt = funBorrarProd(listaUsu,USUARIO,listaProducto,PRODUCTOS);
+            auxInt = funListarPubUsu(listaUsu,USUARIO,listaProducto,PRODUCTOS);
             if(auxInt == -1)
             {
                 printf("El Usuario ingresado no existe!!!\n");
             }
-            funBorrarPantalla();
+            system("cls");
             break;
 
         case 9:

@@ -54,11 +54,11 @@ int main()
             }
             else if (auxInt == 1)
             {
-                printf("El usuario se modifico!\n");
+                printf("El Usuario o Contrasenia no son correctos\n");
             }
             else
             {
-                printf("El Usuario o Contrasenia no son correctos\n");
+                printf("El usuario se modifico!\n");
             }
             funBorrarPantalla();
             break;
@@ -67,11 +67,11 @@ int main()
             auxInt = funBorrarUsu(listaUsu,USUARIO,listaProducto,PRODUCTOS);
             if(auxInt == 0)
             {
-                printf("El usuario no se dio de baja!\n");
+                printf("\nEl usuario no se dio de baja!\n");
             }
             else if (auxInt == 1)
             {
-                printf("El usuario se dio de baja!\n");
+                printf("\nEl usuario se dio de baja!\n");
             }
             else
             {
@@ -88,11 +88,11 @@ int main()
             }
             else if (auxInt == -1)
             {
-                printf("No hay mas espacio para ingresar productos.\n");
+                printf("El Usuario o Contrasenia no son correctos\n");
             }
             else
             {
-                printf("El Usuario o Contrasenia no son correctos\n");
+                printf("No hay mas espacio para ingresar productos.\n");
             }
             funBorrarPantalla();
             break;
@@ -132,7 +132,7 @@ int main()
             break;
 
         case 7:
-            auxInt = funBorrarProd(listaUsu,USUARIO,listaProducto,PRODUCTOS);
+            auxInt = funCompra(listaUsu,USUARIO,listaProducto,PRODUCTOS);
             if(auxInt == 1)
             {
                 printf("La compra se realizo exitosamente!!!\n");

@@ -157,13 +157,13 @@ int funAltaProd(eProducto lista[],int tP, eUsuario listaUsu[], int tU)
             auxInt = funChequeoLetras(auxChar1);
             auxCont = funContarCaracteres(auxChar1,CHARUSU);
         }
-        printf("Ingrese la contraseña (%d caracteres maximo): ",CHARPASS);
+        printf("Ingrese la contrasenia (%d caracteres maximo): ",CHARPASS);
         fflush(stdin);
         gets(auxChar2);
         auxCont = funContarCaracteres(auxChar2,CHARPASS);
         while (auxCont != 0)
         {
-            printf("Reingrese la contraseña (%d caracteres maximo): ",CHARPASS);
+            printf("Reingrese la contrasenia (%d caracteres maximo): ",CHARPASS);
             fflush(stdin);
             gets(auxChar2);
             auxCont = funContarCaracteres(auxChar2,CHARPASS);
@@ -282,6 +282,7 @@ int funBuscarPub(eProducto lista[], int ID, int t)
         if (lista[i].idProducto == ID)
         {
             index = i;
+            break;
         }
         else
         {
@@ -318,7 +319,7 @@ int funBuscarUsyCon(eUsuario lista[], int T, char usu[], char contr[])
     int flag = -1;
     for (i=0; i<T; i++)
     {
-        if (strcmp(lista[i].Usuario,usu) == 0 && strcmp(lista[i].Password, contr) == 0 && (lista[i].Estado == 0))
+        if (strcmp(lista[i].Usuario,usu) == 0 && strcmp(lista[i].Password, contr) == 0 && (lista[i].Estado != 0))
         {
             flag = i;
             break;
@@ -329,13 +330,13 @@ int funBuscarUsyCon(eUsuario lista[], int T, char usu[], char contr[])
 
 void funMostrarPublicacion(eProducto lista)
 {
-    printf("%d\t%50s\t%d\t%d\t\%18s\n",lista.idProducto,lista.Nombre,lista.Stock,lista.Precio,lista.Usuario);
+    printf("%d\t%50s\t%d\t%d\t%d\t\%18s\n",lista.idProducto,lista.Nombre,lista.Precio,lista.Stock,lista.cantVentProduc,lista.Usuario);
 }
 
 void funMostrarTodasPublicaciones(eProducto lista[], int t)
 {
     int i;
-    printf("ID\t%50s\t%s\t%s\t%s\t%18s\n","Nombre","Precio","Vendido","Stock","Usuario");
+    printf("ID\t%50s\t%s\t%s\t%s\t%18s\n","Nombre","Precio","Stock","Vendido","Usuario");
     for(i=0; i<t; i++)
     {
         if (lista[i].Estado != 0)
@@ -367,13 +368,13 @@ int funCrearUsu(eUsuario lista[],int index, int t)
     if (auxInt == -1)
     {
         strcpy(lista[index].Usuario,auxChar);
-        printf("Ingrese la contraseña (%d caracteres maximo): ",CHARPASS);
+        printf("Ingrese la contrasenia (%d caracteres maximo): ",CHARPASS);
         fflush(stdin);
         gets(auxChar);
         auxCont = funContarCaracteres(auxChar,CHARPASS);
         while (auxCont != 0)
         {
-            printf("Reingrese la contraseña (%d caracteres maximo): ",CHARPASS);
+            printf("Reingrese la contrasenia (%d caracteres maximo): ",CHARPASS);
             fflush(stdin);
             gets(auxChar);
             auxCont = funContarCaracteres(auxChar,CHARPASS);
@@ -395,7 +396,7 @@ int funModProd(eUsuario listaUsu[], int tU, eProducto listaProd[], int tP)
     printf("Igrese el Usuario: ");
     fflush(stdin);
     gets(auxChar1);
-    printf("Igrese la Contraseña: ");
+    printf("Igrese la contrasenia: ");
     fflush(stdin);
     gets(auxChar2);
     index = funBuscarUsyCon(listaUsu, tU,auxChar1,auxChar2);
@@ -432,8 +433,7 @@ int funModProd(eUsuario listaUsu[], int tU, eProducto listaProd[], int tP)
                 funMostrarPublicacion(listaProd[index]);
                 opcion=funMostrarMenu("1-Modificar Precio\
                                       \n2-Modificar Stock\
-                                      \n3-Finalizar\
-                                      \nIngrese la opcion a usar: ");
+                                      \n3-Finalizar");
                 switch (opcion)
                 {
                 case 1:
@@ -520,7 +520,7 @@ int funModUsu(eUsuario lista[], int t)
     printf("Igrese el Usuario : ");
     fflush(stdin);
     gets(auxChar1);
-    printf("Igrese La Contraseña: ");
+    printf("Igrese La Contrasenia: ");
     fflush(stdin);
     gets(auxChar2);
     index = funBuscarUsyCon(lista,t,auxChar1,auxChar2);
@@ -534,8 +534,7 @@ int funModUsu(eUsuario lista[], int t)
             opcion=funMostrarMenu("1-Modificar Nombre\
                              \n2-Modificar Apellido\
                              \n3-Modificar Apellido\
-                             \n4-Finalizar\
-                             \nIngrese la opcion a usar: ");
+                             \n4-Finalizar");
             switch (opcion)
             {
             case 1:
@@ -663,7 +662,7 @@ int funBorrarProd(eUsuario listaUsu[], int tU, eProducto listaProd[], int tP)
     printf("Igrese el Usuario: ");
     fflush(stdin);
     gets(auxChar1);
-    printf("Igrese la Contraseña: ");
+    printf("Igrese la contrasenia: ");
     fflush(stdin);
     gets(auxChar2);
     index = funBuscarUsyCon(listaUsu, tU,auxChar1,auxChar2);
@@ -720,7 +719,7 @@ int funBorrarUsu(eUsuario listaUsu[], int tU, eProducto listaProd[], int tP)
     printf("Igrese el Usuario que desaea borrar: ");
     fflush(stdin);
     gets(auxChar1);
-    printf("Igrese la Contraseña: ");
+    printf("Igrese la contrasenia: ");
     fflush(stdin);
     gets(auxChar2);
     index = funBuscarUsyCon(listaUsu, tU,auxChar1,auxChar2);

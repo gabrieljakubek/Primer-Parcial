@@ -5,7 +5,7 @@
 
 int main()
 {
-    system("mode con: cols=140 lines=30");
+    system("mode con: cols=150 lines=35");
     system("color 2");
     int opcion, auxInt;
     char auxChar = 's';
@@ -37,11 +37,11 @@ int main()
             }
             else if (auxInt == -1)
             {
-                printf("No hay mas espacio para ingresar personas.\n");
+                printf("El Usuario ingresado ya figura en la lista\n");
             }
             else
             {
-                printf("El Usuario ingresado ya figura en la lista\n");
+                printf("No hay mas espacio para ingresar personas.\n");
             }
             funBorrarPantalla();
             break;
@@ -54,11 +54,11 @@ int main()
             }
             else if (auxInt == 1)
             {
-                printf("El Usuario o Contrasenia no son correctos\n");
+                printf("El usuario se modifico!\n");
             }
             else
             {
-                printf("El usuario se modifico!\n");
+                printf("El Usuario o Contrasenia no son correctos\n");
             }
             funBorrarPantalla();
             break;

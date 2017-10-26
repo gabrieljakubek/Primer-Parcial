@@ -330,13 +330,13 @@ int funBuscarUsyCon(eUsuario lista[], int T, char usu[], char contr[])
 
 void funMostrarPublicacion(eProducto lista)
 {
-    printf("%d\t%50s\t%d\t%d\t%d\t\%18s\n",lista.idProducto,lista.Nombre,lista.Precio,lista.Stock,lista.cantVentProduc,lista.Usuario);
+    printf("\t%d\t%50s\t%d\t%d\t%d\t%18d\t\t%18s\n",lista.idProducto,lista.Nombre,lista.Precio,lista.Stock,lista.cantVentProduc,lista.cantVentas,lista.Usuario);
 }
 
 void funMostrarTodasPublicaciones(eProducto lista[], int t)
 {
     int i;
-    printf("ID\t%50s\t%s\t%s\t%s\t%18s\n","Nombre","Precio","Stock","Vendido","Usuario");
+    printf("\t%s\t%50s\t%s\t%s\t%s\t\t%s\t%18s\n","ID","Nombre","Precio","Stock","Vendido","Cantidad de Ventas","Usuario");
     for(i=0; i<t; i++)
     {
         if (lista[i].Estado != 0)
@@ -403,7 +403,7 @@ int funModProd(eUsuario listaUsu[], int tU, eProducto listaProd[], int tP)
     if (index != -1)
     {
         system("cls");
-        printf("ID\t%50s\t%s\t%s\t%s\t%18s\n","Nombre","Precio","Vendido","Stock","Usuario");
+        printf("\t%s\t%50s\t%s\t%s\t%s\t\t%s\t%18s\n","ID","Nombre","Precio","Stock","Vendido","Cantidad de Ventas","Usuario");
         for(i=0; i<tP; i++)
         {
             if(strcmp(listaUsu[index].Usuario,listaProd[i].Usuario) == 0 && (listaProd[i].Estado != 0))
@@ -429,7 +429,7 @@ int funModProd(eUsuario listaUsu[], int tU, eProducto listaProd[], int tP)
             system("cls");
             do
             {
-                printf("ID\t%50s\t%s\t%s\t%s\t%18s\n","Nombre","Precio","Vendido","Stock","Usuario");
+                printf("\t%s\t%50s\t%s\t%s\t%s\t\t%s\t%18s\n","ID","Nombre","Precio","Stock","Vendido","Cantidad de Ventas","Usuario");
                 funMostrarPublicacion(listaProd[index]);
                 opcion=funMostrarMenu("1-Modificar Precio\
                                       \n2-Modificar Stock\
@@ -529,11 +529,11 @@ int funModUsu(eUsuario lista[], int t)
         system("cls");
         do
         {
-            printf("&s\t%30s\t%20s\t%s\n","Usuario","Nombre","Apellido","Calificacion");
+            printf("%s\t%30s\t%20s\t%s\n","Usuario","Nombre","Apellido","Calificacion");
             funMostrarUsu(lista[index]);
             opcion=funMostrarMenu("1-Modificar Nombre\
                              \n2-Modificar Apellido\
-                             \n3-Modificar Apellido\
+                             \n3-Modificar Contrasenia\
                              \n4-Finalizar");
             switch (opcion)
             {
@@ -633,6 +633,10 @@ int funModUsu(eUsuario lista[], int t)
         }
         while (salir != 's');
     }
+    else
+    {
+        flag = -1;
+    }
     return flag;
 }
 
@@ -669,7 +673,7 @@ int funBorrarProd(eUsuario listaUsu[], int tU, eProducto listaProd[], int tP)
     if (index != -1)
     {
         system("cls");
-        printf("ID\t%50s\t%s\t%s\t%s\t%18s\n","Nombre","Precio","Vendido","Stock","Usuario");
+        printf("\t%s\t%50s\t%s\t%s\t%s\t\t%s\t%18s\n","ID","Nombre","Precio","Stock","Vendido","Cantidad de Ventas","Usuario");
         for(i=0; i<tP; i++)
         {
             if(strcmp(listaUsu[index].Usuario,listaProd[i].Usuario) == 0 && (listaProd[i].Estado != 0))
@@ -693,7 +697,7 @@ int funBorrarProd(eUsuario listaUsu[], int tU, eProducto listaProd[], int tP)
         if (index != -1)
         {
             system("cls");
-            printf("ID\t%50s\t%s\t%s\t%s\t%18s\n","Nombre","Precio","Vendido","Stock","Usuario");
+            printf("\t%s\t%50s\t%s\t%s\t%s\t\t%s\t%18s\n","ID","Nombre","Precio","Stock","Vendido","Cantidad de Ventas","Usuario");
             funMostrarPublicacion(listaProd[index]);
             printf("Esta seguro que desea cancelar la publicacion? s/n");
             auxResp = getche();
@@ -868,7 +872,8 @@ int funListarPubUsu(eUsuario listaUsu[], int tUsu, eProducto listaPro[], int tPr
     index = funBuscarUsuario(listaUsu, auxChar1, tUsu);
     if (index != -1)
     {
-        printf("ID\t%50s\t%s\t%s\t%s\t%18s\n","Nombre","Precio","Vendido","Stock","Usuario");
+        system("cls");
+        printf("\t%s\t%50s\t%s\t%s\t%s\t\t%s\t%18s\n","ID","Nombre","Precio","Stock","Vendido","Cantidad de Ventas","Usuario");
         for (i=0; i<tPro; i++)
         {
             if (strcmp(listaUsu[index].Usuario,listaPro[i].Usuario) == 0 && (listaPro[i].Estado != 0))
